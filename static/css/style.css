@@ -9520,8 +9520,16 @@ h6,
 @media (max-width: 991.98px) {
   .container-fluid.nav-bar, .nav-bar.container-sm, .nav-bar.container-md, .nav-bar.container-lg, .nav-bar.container-xl {
     position: relative;
-    background: #33211D;
+    background: linear-gradient(rgba(51, 33, 29, 0.9), rgba(51, 33, 29, 0.9)), url(../img/background.jpg);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
+
+  .page-header{
+    display: none;
+  }
+
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -9548,9 +9556,19 @@ h6,
 }
 
 .overlay-top::before {
-  top: -1px;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 15px;
+  left: 0;
+  top: 0; /* Ensure it's visible */
   background: url(../img/overlay-top.png);
+  z-index: 10;
+
+  /* Force rendering */
+  transform: translateZ(0);
 }
+
 
 .overlay-bottom::after {
   bottom: -1px;
@@ -9585,7 +9603,7 @@ h6,
 
 .service-icon {
   margin-right: 15px;
-  width: 45px;
+  width: 50px; /* Increased width */
   height: 45px;
   font-size: 18px;
   display: inline-flex;
@@ -9596,7 +9614,7 @@ h6,
   background: #DA9F5B;
 }
 
-.menu-price {
+.featured-price {
   position: absolute;
   margin: 0;
   top: -5px;
@@ -9607,9 +9625,51 @@ h6,
   align-items: center;
   justify-content: center;
   border-radius: 45px;
+  font-size: 14px;
   color: #33211D;
   background: #DA9F5B;
 }
+
+.quantity-control {
+    display: flex;
+    align-items: center; /* Ensures vertical alignment */
+    gap: 5px; /* Space between elements */
+}
+
+.qty-btn {
+    width: 30px;
+    height: 40px;
+    border: none;
+    background: #DA9F5B;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.qty-input {
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+.menu-price {
+  position: absolute;
+  margin: 0;
+  top: -15px;
+  right: -5px;
+  width: 70px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 45px;
+  font-size: 16px;
+  color: #33211D;
+  background: #DA9F5B;
+}
+
 
 .testimonial-carousel .owl-dots {
   margin-top: 30px;
@@ -9645,10 +9705,13 @@ h6,
 
 .reservation,
 .page-header,
+.cart,
 .offer,
-.footer {
-  background: linear-gradient(rgba(51, 33, 29, 0.9), rgba(51, 33, 29, 0.9)), url(../img/bg.jpg);
+.footer
+{
+  background: linear-gradient(rgba(51, 33, 29, 0.9), rgba(51, 33, 29, 0.9)), url(../img/background.jpg);
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
 }
+

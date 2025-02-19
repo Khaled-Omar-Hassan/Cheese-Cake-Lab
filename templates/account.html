@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid py-5">
+    <div class="container">
+        <h1 class="text-white mb-5">Your Account</h1>
+        <div class="row">
+            <!-- Personal Information -->
+            <div class="col-lg-4 mb-5">
+                <div class="bg-dark p-4 rounded-lg">
+                    <h4 class="text-white mb-4">Personal Information</h4>
+                    <p class="text-white mb-2">Name: <span id="user-name">John Doe</span></p>
+                    <p class="text-white mb-2">Email: <span id="user-email">john@example.com</span></p>
+                    <p class="text-white mb-2">Phone: <span id="user-phone">+1234567890</span></p>
+                    <button class="btn btn-primary mt-3" onclick="editInfo()">Edit Info</button>
+                </div>
+            </div>
+
+            <!-- Past Orders -->
+            <div class="col-lg-4 mb-5">
+                <div class="bg-dark p-4 rounded-lg">
+                    <h4 class="text-white mb-4">Past Orders</h4>
+                    <div id="order-history">
+                        <p class="text-white mb-2">Order #12345 - $20.00 - Delivered</p>
+                        <p class="text-white mb-2">Order #12346 - $35.00 - In Progress</p>
+                        <p class="text-white mb-2">Order #12347 - $15.00 - Cancelled</p>
+                    </div>
+                    <button class="btn btn-outline-light mt-3">View All Orders</button>
+                </div>
+            </div>
+
+            <!-- Reviews -->
+            <div class="col-lg-4">
+                <div class="bg-dark p-4 rounded-lg">
+                    <h4 class="text-white mb-4">Your Reviews</h4>
+                    <div id="user-reviews">
+                        <p class="text-white mb-2">"Amazing coffee!" - 5 stars</p>
+                        <p class="text-white mb-2">"Quick delivery, fresh beans." - 4 stars</p>
+                    </div>
+                    <button class="btn btn-outline-light mt-3">Write a Review</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function editInfo() {
+        const name = prompt("Enter your name:", document.getElementById("user-name").textContent);
+        const email = prompt("Enter your email:", document.getElementById("user-email").textContent);
+        const phone = prompt("Enter your phone:", document.getElementById("user-phone").textContent);
+
+        if (name) document.getElementById("user-name").textContent = name;
+        if (email) document.getElementById("user-email").textContent = email;
+        if (phone) document.getElementById("user-phone").textContent = phone;
+
+        alert("Information updated successfully!");
+    }
+</script>
+
+{% endblock %}

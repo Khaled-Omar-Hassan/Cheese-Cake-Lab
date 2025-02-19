@@ -16,8 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from store.views import index
+from store.views import home, about, contact, menu, login, cart, checkout, account
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),]
+    path('', home, name='home'),
+    path('about/', about, name='about'),
+    path('contact/', contact, name='contact'),
+    path('menu/', menu, name='menu'),
+    path('cart/', cart, name='cart'),
+    path('login/', login, name='login'),
+    path('checkout/', checkout, name='checkout'),
+    path('account/', account, name='account'),
+
+
+]

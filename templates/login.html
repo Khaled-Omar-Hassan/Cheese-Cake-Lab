@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid my-5">
+    <div class="container">
+        <div class="reservation position-relative overlay-top overlay-bottom">
+            <div class="row align-items-center">
+                <div class="col-lg-6 my-5 my-lg-0">
+                    <div class="p-5">
+                        <div class="mb-4">
+                            <h1 class="display-3 text-primary">Welcome!</h1>
+                            <h1 class="text-white">Sign In or Sign Up</h1>
+                        </div>
+                        <p class="text-white">Join us for the best experience! Sign in to access your account or create a new one.</p>
+                        <ul class="list-inline text-white m-0">
+                            <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Secure and Fast</li>
+                            <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Access Exclusive Deals</li>
+                            <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Manage Your Reservations</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
+                        <input type="checkbox" id="chk" class="d-none">
+
+                        <!-- Sign In Form -->
+                        <div class="sign-in" id="signInForm">
+                            <h1 class="text-white mb-4 mt-5">Sign In</h1>
+                            <form class="mb-3">
+                                <div class="form-group">
+                                    <input type="email" class="form-control bg-transparent border-primary p-4" placeholder="Email" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control bg-transparent border-primary p-4" placeholder="Password" required>
+                                </div>
+                                <div class="text-right mb-3">
+                                    <a href="#" class="text-white">Forgot Password?</a>
+                                </div>
+                                <button class="btn btn-primary btn-block font-weight-bold py-3" type="submit">Sign In</button>
+                                <p class="text-white mt-3">Don't have an account? <label for="chk" class="text-primary" style="cursor: pointer;">Sign Up</label></p>
+                            </form>
+                        </div>
+
+                        <!-- Sign Up Form -->
+                        <div class="sign-up d-none" id="signUpForm">
+                            <h1 class="text-white mb-4 mt-5">Sign Up</h1>
+                            <form class="mb-3">
+                                <div class="form-group">
+                                    <input type="text" class="form-control bg-transparent border-primary p-4" placeholder="Username" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control bg-transparent border-primary p-4" placeholder="Email" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control bg-transparent border-primary p-4" placeholder="Password" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control bg-transparent border-primary p-4" placeholder="Confirm Password" required>
+                                </div>
+                                <button class="btn btn-primary btn-block font-weight-bold py-3" type="submit">Sign Up</button>
+                                <p class="text-white mt-3">Already have an account? <label for="chk" class="text-primary" style="cursor: pointer;">Sign In</label></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Toggle between Sign In and Sign Up
+    document.getElementById('chk').addEventListener('change', function() {
+        document.getElementById('signInForm').classList.toggle('d-none');
+        document.getElementById('signUpForm').classList.toggle('d-none');
+    });
+</script>
+
+{% endblock %}

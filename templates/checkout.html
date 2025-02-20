@@ -3,80 +3,95 @@
 
 {% block content %}
     <div class="container-fluid py-5">
-    <div class="container">
-        <h1 class="text-white mb-5">Checkout</h1>
-        <div class="row">
-            <!-- Billing Information -->
-            <div class="col-lg-8 mb-5">
-                <div class="bg-dark p-4 rounded-lg">
-                    <h4 class="text-white mb-4">Billing Details</h4>
-                    <form id="checkout-form">
-                        <div class="form-group">
-                            <label class="text-white">Full Name</label>
-                            <input type="text" class="form-control bg-transparent border-primary text-white" placeholder="John Doe" required>
+        <div class="container">
+            <div class="cart-section position-relative overlay-top overlay-bottom p-4 cart">
+                <h1 class="text-white mb-4">Checkout</h1>
+                <div class="row ">
+                    <!-- Billing Information -->
+                    <div class="col-lg-8 mb-5">
+                        <div class="p-4 rounded-lg">
+                            <h4 class="text-white mb-4">Billing Details</h4>
+                            <form id="checkout-form">
+                                <div class="form-group">
+                                    <label class="text-white">Full Name</label>
+                                    <input type="text" class="form-control bg-transparent border-primary text-white"
+                                           placeholder="John Doe" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-white">Email Address</label>
+                                    <input type="email" class="form-control bg-transparent border-primary text-white"
+                                           placeholder="example@example.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-white">Phone Number</label>
+                                    <input type="text" class="form-control bg-transparent border-primary text-white"
+                                           placeholder="+123456789" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-white">Address</label>
+                                    <input type="text" class="form-control bg-transparent border-primary text-white"
+                                           placeholder="123 Main St, City" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-white">Payment Method</label>
+                                    <select class="custom-select bg-transparent border-primary text-white">
+                                        <option value="credit-card">Credit Card</option>
+                                        <option value="paypal">PayPal</option>
+                                        <option value="cash">Cash on Delivery</option>
+                                    </select>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <label class="text-white">Email Address</label>
-                            <input type="email" class="form-control bg-transparent border-primary text-white" placeholder="example@example.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="text-white">Phone Number</label>
-                            <input type="text" class="form-control bg-transparent border-primary text-white" placeholder="+123456789" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="text-white">Address</label>
-                            <input type="text" class="form-control bg-transparent border-primary text-white" placeholder="123 Main St, City" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="text-white">Payment Method</label>
-                            <select class="custom-select bg-transparent border-primary text-white">
-                                <option value="credit-card">Credit Card</option>
-                                <option value="paypal">PayPal</option>
-                                <option value="cash">Cash on Delivery</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Order Summary -->
-            <div class="col-lg-4">
-                <div class="bg-dark p-4 rounded-lg">
-                    <h4 class="text-white mb-4">Order Summary</h4>
-                    <div id="order-summary">
-                        <p class="text-white d-flex justify-content-between">Subtotal: <span id="subtotal">$0.00</span></p>
-                        <p class="text-white d-flex justify-content-between">Tax (10%): <span id="tax">$0.00</span></p>
-                        <hr>
-                        <h5 class="text-white d-flex justify-content-between">Total: <span id="total">$0.00</span></h5>
                     </div>
-                    <button class="btn btn-primary btn-block mt-4" onclick="submitCheckout()">Complete Purchase</button>
-                    <a href="/cart" class="btn btn-outline-light btn-block mt-2">Back to Cart</a>
+
+                    <!-- Order Summary -->
+                    <div class="col-lg-4">
+                        <div class="cart-summary p-4 border rounded">
+                            <h3 class="text-white mb-4">Order Summary</h3>
+                            <p class="text-white-50 d-flex justify-content-between">
+                                <span>Subtotal:</span>
+                                <span id="subtotal">£0.00</span>
+                            </p>
+                            <p class="text-white-50 d-flex justify-content-between">
+                                <span>Tax (10%):</span>
+                                <span id="tax">£0.00</span>
+                            </p>
+                            <hr class="bg-white">
+                            <h4 class="text-white d-flex justify-content-between">
+                                <span>Total:</span>
+                                <span id="total">£0.00</span>
+                            </h4>
+                            <a href="{% url 'checkout' %}" class="btn btn-primary btn-block mt-4">Proceed to
+                                Checkout</a>
+                            <a href="{% url 'menu' %}" class="btn btn-outline-light btn-block mt-2">Continue
+                                Shopping</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    // Update Order Summary (Simulating Cart Items)
-    function updateSummary() {
-        let subtotal = 45.00; // Replace with actual subtotal
-        let tax = subtotal * 0.1;
-        let total = subtotal + tax;
+    <script>
+        // Update Order Summary (Simulating Cart Items)
+        function updateSummary() {
+            let subtotal = 45.00;
+            let tax = subtotal * 0.1;
+            let total = subtotal + tax;
 
-        document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
-        document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
-        document.getElementById('total').textContent = `$${total.toFixed(2)}`;
-    }
+            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+            document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+        }
 
-    // Handle Checkout Submission
-    function submitCheckout() {
-        alert('Your order has been placed successfully!');
-        document.getElementById('checkout-form').reset();
-    }
+        // Handle Checkout Submission
+        function submitCheckout() {
+            alert('Your order has been placed successfully!');
+            document.getElementById('checkout-form').reset();
+        }
 
-    // Initialize
-    updateSummary();
-</script>
+        // Initialize
+        updateSummary();
+    </script>
 
 {% endblock %}

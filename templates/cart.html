@@ -4,49 +4,49 @@
 {% block content %}
     <div class="container-fluid my-5">
         <div class="container">
-            <div class="cart-section position-relative overlay-top overlay-bottom p-5 cart">
-                <h1 class="text-white mb-5">Your Cart</h1>
+            <div class="cart-section position-relative overlay-top overlay-bottom p-4 cart">
+                <h1 class="text-white mb-4">Your Cart</h1>
 
                 <div class="row">
                     <!-- Cart Items -->
-                    <div class="col-lg-8">
-                        <div class="cart-item position-relative d-flex justify-content-between align-items-center mb-4 p-4 border rounded">
+                    <div class="col-lg-8 mb-4">
+                        <div class="cart-item position-relative d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 p-3 border rounded">
                             <h5 class="menu-price price" data-price="1300">£ 1300</h5>
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center flex-grow-1">
                                 <img src="{% static 'img/lotus_cake.jpg' %}" alt="Lotus Cheesecake" class="rounded-circle" width="80" height="80">
-                                <div class="ml-4">
+                                <div class="ml-md-4 ml-2">
                                     <h4 class="text-white">Lotus CheeseCake</h4>
                                     <p class="text-white-50">Delicious and Tasty</p>
                                 </div>
                             </div>
 
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center mt-3 mt-md-0">
                                 <div class="input-group">
-                                    <button class="btn btn-primary mr-2" onclick="changeQuantity(this, -1)">-</button>
-                                    <input type="text" class="form-control text-center" value="1" min="1" style="-moz-appearance: textfield; appearance: textfield; width: 50px;">
-                                    <button class="btn btn-primary ml-2" onclick="changeQuantity(this, +1)">+</button>
+                                    <button class="btn btn-primary" onclick="changeQuantity(this, -1, event)">-</button>
+                                    <input type="text" class="form-control text-center" readonly="readonly" value="1" min="1" style="width: 50px;">
+                                    <button class="btn btn-primary" onclick="changeQuantity(this, +1, event)">+</button>
                                 </div>
-                                <button class="btn btn-danger ml-4" onclick="removeItem(this)">Remove</button>
+                                <button class="btn btn-danger ml-3" onclick="removeItem(this, event)">Remove</button>
                             </div>
                         </div>
 
-                        <div class="cart-item position-relative d-flex justify-content-between align-items-center mb-4 p-4 border rounded">
+                        <div class="cart-item position-relative d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 p-3 border rounded">
                             <h5 class="menu-price price" data-price="140">£ 140</h5>
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center flex-grow-1">
                                 <img src="{% static 'img/caramel_sauce.png' %}" alt="Caramel Sauce" class="rounded-circle" width="80" height="80">
-                                <div class="ml-4">
+                                <div class="ml-md-4 ml-2">
                                     <h4 class="text-white">Caramel Sauce</h4>
                                     <p class="text-white-50">200 grams</p>
                                 </div>
                             </div>
 
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center mt-3 mt-md-0">
                                 <div class="input-group">
-                                    <button class="btn btn-primary mr-2" onclick="changeQuantity(this, -1)">-</button>
-                                    <input type="text" class="form-control text-center" value="1" min="1" style="-moz-appearance: textfield; appearance: textfield; width: 50px;">
-                                    <button class="btn btn-primary ml-2" onclick="changeQuantity(this, +1)">+</button>
+                                    <button class="btn btn-primary" onclick="changeQuantity(this, -1, event)">-</button>
+                                    <input type="text" class="form-control text-center" readonly="readonly" value="1" min="1" style="width: 50px;">
+                                    <button class="btn btn-primary" onclick="changeQuantity(this, +1, event)">+</button>
                                 </div>
-                                <button class="btn btn-danger ml-4" onclick="removeItem(this)">Remove</button>
+                                <button class="btn btn-danger ml-3" onclick="removeItem(this, event)">Remove</button>
                             </div>
                         </div>
                     </div>
@@ -57,40 +57,42 @@
                             <h3 class="text-white mb-4">Order Summary</h3>
                             <p class="text-white-50 d-flex justify-content-between">
                                 <span>Subtotal:</span>
-                                <span id="subtotal">$0.00</span>
+                                <span id="subtotal">£0.00</span>
                             </p>
                             <p class="text-white-50 d-flex justify-content-between">
                                 <span>Tax (10%):</span>
-                                <span id="tax">$0.00</span>
+                                <span id="tax">£0.00</span>
                             </p>
                             <hr class="bg-white">
                             <h4 class="text-white d-flex justify-content-between">
                                 <span>Total:</span>
-                                <span id="total">$0.00</span>
+                                <span id="total">£0.00</span>
                             </h4>
                             <a href="{% url 'checkout' %}" class="btn btn-primary btn-block mt-4">Proceed to Checkout</a>
                             <a href="{% url 'menu' %}" class="btn btn-outline-light btn-block mt-2">Continue Shopping</a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        function changeQuantity(button, delta) {
+        function changeQuantity(button, delta, event) {
             let input = button.parentElement.querySelector('input');
             let newValue = parseInt(input.value) + delta;
             if (newValue >= 1) {
                 input.value = newValue;
                 updateCart();
             }
+            button.blur();
         }
 
-        function removeItem(button) {
+        function removeItem(button, event) {
+            event.stopPropagation();
             button.closest('.cart-item').remove();
             updateCart();
+            button.blur();
         }
 
         function updateCart() {
@@ -104,7 +106,6 @@
             });
 
             let delivery = 80.00;
-
             let total = subtotal + delivery;
 
             document.getElementById('subtotal').textContent = `£ ${subtotal.toFixed(2)}`;
